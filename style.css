@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* I.08. Setting up :root with colors: */
+/* AFTER: We're adding them to ::before, and creating right::before (I.09.) */
+:root {
+    --left-bg-color: rgba(87, 84, 236, 0.7);
+    --right-bg-color: rgba(43, 43, 43, 0.8);
+    /* I.12. Adding color for button when we hover: (NOTE: Both for left, and right)*/
+    /* AFTER: We add styles to btn:hover both for left, and right (I.13.) */
+    --left-btn-hover-color: rgba(87, 84, 236, 1);
+    --right-btn-hover-button: rgba(28, 122, 28, 1);
+    /* II.03. Adding width: (NOTE: Left-side/right-side hover) */
+    /* AFTER: We do the same styling for the right-side hover (II.04.) */
+    --hover-width: 75%;
+    --other-width: 25%;
+    /* II.11. Adding speed here: (NOTE: For hover transition) */
+    /* AFTER: As a last thing we add media query at the bottom (II.12.) */
+    --speed: 1000ms;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /*   */
+    justify-content: center;
+    height: 100vh;
+    /* NOTE: We use "overflow" on hidden, because we don't want scroll bars to be shown by default */
+    /* overflow: hidden; */
+    margin: 0;
+}
+
+/* I.10. Adding styles to h1: */
+h1 {
+    font-size: 4rem;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    /* NOTE: We don't want it to wrap, when screen gets smaller, so we need to set the white space */
+    white-space: nowrap;
+}
+
+/* I.11. Styling the button: */
+/* AFTER: We add a color to :root when we hover the button (I.12.) */
+.btn {
+    /* NOTE: We have to position it absolute within its container */
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    color: #fff;
+    border: #fff solid 0.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 15rem;
+    padding: 1.5rem;
+}
+
+/* I.13. Adding hover effect for button left: */
+.split.left .btn:hover {
+    background-color: var(--left-btn-hover-color);
+    border-color: var(--left-btn-hover-color);
+}
+
+/* I.13. Adding hover effer button right: */
+/* AFTER: We add some extra css, and do the js in section II.  */
+.split.right .btn:hover {
+    background-color: var(--right-btn-hover-button);
+    border-color: var(--right-btn-hover-button);;
+}
+
+/* I.03. We start by styling the container: */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+}
+
+/* I.04. Then we do the split class: */
+.split {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* I.05. We style the left side: */
+.split.left {
+    left: 0;
+    background: url('playstation5.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* I.07. After we're styling left ::before: */
+/* AFTER: We set a :root with background colours at the top (I.08.) */
+.split.left::before {
+    /* NOTE: We have to use the content property, and put an empty string over that (anyway it won't work!) */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* NOTE: We add a background color by setting a var for that */
+    background-color: var(--left-bg-color);
+}
+
+/* I.06. We style the right side: */
+.split.right {
+    right: 0;
+    background: url('xboxka.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* I.09. Adding styles to right::before: */
+/* AFTER: We're styling the h1 and the button above (I.10.) */
+.split.right::before {
+    /* NOTE: We have to use the content property, and put an empty string over that (anyway it won't work!) */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* NOTE: We add a background color by setting a var for that */
+    background-color: var(--right-bg-color);
+}
+
+/* II.10. Adding transition on hover effect: */
+/* AFTER: We add var(--speed) to :root (II.11.) */
+.split.left, .split.right, .split.left::before, .split.right::before {
+    /* NOTE: With "all" we can just add the transiiton to all of them */
+    transition: all var(--speed) ease-in-out;
+}
+
+/* II.01. Adding hover effect to the left-side: */
+.hover-left .left {
+    /* NOTE: When this is active we want to take the left-side, and increase the width */
+    width: var(--hover-width);
+}
+
+/* II.02. When left-side's width increases, we have to do the opposite, with the right: */
+/* AFTER: We're setting width in :root (II.03.) */
+.hover-left .right {
+    width: var(--other-width);
+}
+
+/* II.04. Styling the right-side hover the same way: */
+/* AFTER: We do the javascript part (II.05.) */
+.hover-right .right {
+    width: var(--hover-width);
+}
+
+.hover-right .left {
+    width: var(--other-width);
+}
+
+/* II.12. Adding media query: */
+/* NOTE: This is in case, if screen gets smaller-size */
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2rem;
+        top: 30%;
+    }
+    .btn {
+        padding: 1.2rem;
+        width: 12rem;
+    }
+}
+
+
+
